@@ -8,8 +8,8 @@ export default function CounterButtons({ value, onClick }: CounterButtonProps) {
 
   return (
     <button type="button" onClick={() => onClick(value)}
-      className={`rounded-md p-3 w-8 h-8 ${add ? 'bg-gold' : 'bg-crimson'} text-black hover:text-silver 
-        active:bg-copper flex items-center justify-center`}>
+      className={`rounded-md p-5 w-8 h-8 ${add ? 'bg-gold' : 'bg-crimson'} text-black hover:text-silver 
+        active:bg-copper flex items-center justify-center font-semibold text-xl`}>
       {add ? '+' : ''}{value}
     </button>
   );

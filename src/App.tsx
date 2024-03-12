@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 // import { useTranslation } from "react-i18next";
 
 import RadialProgress from "./components/RadialProgress"
-import CounterButtons from "./components/CounterButtons"
+import ButtonsPanel from "./components/ButtonsPanel";
 
 function App() {
   // const { t } = useTranslation();
@@ -22,23 +22,20 @@ function App() {
         setProteinCounter(() => proteinCounter + 1);
       else if (newCounter < proteinCounter)
         setProteinCounter(() => proteinCounter - 1);
-    }, 1);
+    }, 5);
 
     return () => clearInterval(interval);
   }, [newCounter, proteinCounter]);
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center bg-black">
+    <main className="w-screen h-screen flex flex-col items-center justify-start pt-10 gap-10 bg-black">
       <h1 className="text-gold text-3xl flex flex-col">
         <p>Protein</p>
         <p className="pl-12">Tracker</p>
       </h1>
       <RadialProgress currentValue={proteinCounter} maxValue={86} />
-      <section>
-        <CounterButtons value={5} onClick={(value) => changeCounter(value)} />
-        <CounterButtons value={-5} onClick={(value) => changeCounter(value)} />
-      </section>
-    </div>
+      <ButtonsPanel changeCounter={changeCounter} />
+    </main>
   )
 }
 
