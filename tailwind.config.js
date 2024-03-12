@@ -5,7 +5,14 @@ export default {
     "./src/**/*.{ts,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'black': '#1A1C20',
+        'gold': '#F0A500',
+        'copper': '#CF7500',
+        'silver': '#F4F4F4'
+      }
+    },
   },
   plugins: [],
 }
