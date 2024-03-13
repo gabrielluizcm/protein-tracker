@@ -1,3 +1,14 @@
 {
-  "hello": "Hello World!"
+  "hello": "Hello World!",
+  "lastSeven": "Last 7 records",
+  "emptyWeek": "No records saved",
+  "weekDays": {
+    "0": "Sunday",
+    "1": "Monday",
+    "2": "Tuesday",
+    "3": "Wednesday",
+    "4": "Thursday",
+    "5": "Friday",
+    "6": "Saturday"
+  }
 }

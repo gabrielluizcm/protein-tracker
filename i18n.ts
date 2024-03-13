@@ -21,7 +21,7 @@ i18n
   .init({
     resources,
     lng: 'en',
-    keySeparator: false,
+    keySeparator: '.',
     interpolation: {
       escapeValue: false,
     },
