@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import RadialProgress from "./components/RadialProgress"
 import ButtonsPanel from "./components/ButtonsPanel";
 import LastWeek from "./components/LastWeek";
+import MyFooter from "./components/MyFooter";
 
 import type { LastWeekRecordType } from "./components/LastWeek";
 
@@ -86,15 +87,18 @@ function App() {
   }, [newCounter, proteinCounter, counterSpeed]);
 
   return (
-    <main className="w-screen h-screen flex flex-col items-center justify-start pt-10 gap-10 bg-black">
-      <h1 className="text-gold text-3xl flex flex-col">
-        <p>Protein</p>
-        <p className="pl-12">Tracker</p>
-      </h1>
-      <RadialProgress currentValue={proteinCounter} maxValue={86} />
-      <ButtonsPanel changeCounter={changeCounter} />
-      <LastWeek />
-    </main>
+    <>
+      <main className="w-screen h-screen flex flex-col items-center justify-start pt-10 gap-10 bg-black">
+        <h1 className="text-gold text-3xl flex flex-col">
+          <p>Protein</p>
+          <p className="pl-12">Tracker</p>
+        </h1>
+        <RadialProgress currentValue={proteinCounter} maxValue={86} />
+        <ButtonsPanel changeCounter={changeCounter} />
+        <LastWeek />
+      </main>
+      <MyFooter />
+    </>
   )
 }
 

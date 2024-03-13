@@ -10,5 +10,9 @@
     "4": "Thursday",
     "5": "Friday",
     "6": "Saturday"
+  },
+  "footer": {
+    "start": "Made with",
+    "end": "by Gabriel Luiz"
   }
 }
