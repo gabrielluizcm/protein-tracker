@@ -14,5 +14,7 @@
   "footer": {
     "start": "Made with",
     "end": "by Gabriel Luiz"
-  }
+  },
+  "weight": "Weight",
+  "activityLevel": "Activity level"
 }
