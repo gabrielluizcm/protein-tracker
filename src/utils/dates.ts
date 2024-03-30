@@ -22,8 +22,8 @@ export const upkeepNewDay = () => {
   dayBefore.setDate(dayBefore.getDate() - 1);
   const lastDate = localStorage.getItem('currentDate') ?? getISODate(dayBefore);
 
-  const lastWeek: LastWeekRecordType[] = JSON.parse(localStorage.getItem('lastWeek') ?? '');
-  if (lastWeek && getISODate(new Date(lastWeek[0].date)) === getISODate(new Date()))
+  const lastWeek: LastWeekRecordType[] = JSON.parse(localStorage.getItem('lastWeek') ?? '{}');
+  if (!Object.keys(lastWeek).length || getISODate(new Date(lastWeek[0].date)) === getISODate(new Date()))
     return;
 
   if (lastWeek.length >= 7)
