@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 
 import RadialProgress from "./components/RadialProgress"
 import ButtonsPanel from "./components/ButtonsPanel";
 import LastWeek from "./components/LastWeek";
 import MyFooter from "./components/MyFooter";
+import DailyCalculator from "./components/DailyCalculator";
 
 import { getISODate, hasDayPassed, upkeepNewDay } from './utils/dates';
 
@@ -11,6 +12,7 @@ function App() {
   const [counterSpeed, setCounterSpeed] = useState(30);
   const [proteinCounter, setProteinCounter] = useState(0);
   const [newCounter, setNewCounter] = useState(0);
+  const [dailyGoal, setDailyGoal] = useState(86);
 
   const changeCounter = (value: number) => {
     let newValue = proteinCounter + value;
@@ -56,8 +58,9 @@ function App() {
           <p>Protein</p>
           <p className="pl-12">Tracker</p>
         </h1>
-        <RadialProgress currentValue={proteinCounter} maxValue={86} />
+        <RadialProgress currentValue={proteinCounter} maxValue={dailyGoal} />
         <ButtonsPanel changeCounter={changeCounter} />
+        <DailyCalculator updateDailyGoalCb={useCallback((goal) => setDailyGoal(goal), [])} />
         <LastWeek />
       </main>
       <MyFooter />
