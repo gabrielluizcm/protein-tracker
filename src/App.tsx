@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from "react"
+import { FaCalculator } from 'react-icons/fa';
 
 import RadialProgress from "./components/RadialProgress"
 import ButtonsPanel from "./components/ButtonsPanel";
 import LastWeek from "./components/LastWeek";
 import MyFooter from "./components/MyFooter";
 import DailyCalculator from "./components/DailyCalculator";
+import Modal from "./components/Modal";
 
 import { getISODate, hasDayPassed, upkeepNewDay } from './utils/dates';
 
@@ -13,6 +15,7 @@ function App() {
   const [proteinCounter, setProteinCounter] = useState(0);
   const [newCounter, setNewCounter] = useState(0);
   const [dailyGoal, setDailyGoal] = useState(86);
+  const [calculatorModal, setCalculatorModal] = useState(true);
 
   const changeCounter = (value: number) => {
     let newValue = proteinCounter + value;
@@ -53,14 +56,21 @@ function App() {
 
   return (
     <>
-      <main className="w-screen h-screen flex flex-col items-center justify-start pt-10 gap-10 bg-black">
+      <main className="w-screen h-screen flex flex-col items-center justify-start pt-10 gap-10 bg-black z-0">
         <h1 className="text-gold text-3xl flex flex-col">
           <p>Protein</p>
           <p className="pl-12">Tracker</p>
         </h1>
+        <FaCalculator className="text-silver absolute text-2xl right-10 top-10
+          cursor-pointer hover:text-gold transition-all"
+          onClick={() => setCalculatorModal(true)} />
         <RadialProgress currentValue={proteinCounter} maxValue={dailyGoal} />
         <ButtonsPanel changeCounter={changeCounter} />
-        <DailyCalculator updateDailyGoalCb={useCallback((goal) => setDailyGoal(goal), [])} />
+        <Modal open={calculatorModal}>
+          <DailyCalculator
+            updateDailyGoalCb={useCallback((goal) => setDailyGoal(goal), [])}
+            closeModal={() => setCalculatorModal(false)} />
+        </Modal>
         <LastWeek />
       </main>
       <MyFooter />

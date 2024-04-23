@@ -3,9 +3,10 @@ import { useTranslation } from "react-i18next";
 
 type DailyCalculatorProps = {
   updateDailyGoalCb: (goal: number) => void;
+  closeModal: () => void;
 }
 
-export default function DailyCalculator({ updateDailyGoalCb }: DailyCalculatorProps) {
+export default function DailyCalculator({ updateDailyGoalCb, closeModal }: DailyCalculatorProps) {
   const { t } = useTranslation();
   const [weight, setWeight] = useState(0);
   const [activityMultiplier, setActivityMultiplier] = useState(1.2);
@@ -29,19 +30,28 @@ export default function DailyCalculator({ updateDailyGoalCb }: DailyCalculatorPr
   }
 
   return (
-    <div className="flex flex-col p3 rounded-md w-40 h-40 bg-copper text-silver items-center justify-center">
-      <label>
-        {t('weight')}:
-        <input type="text" onChange={handleWeightChange} className="rounded-md text-start bg-black" value={weight} />
-      </label>
-      <label>
-        {t('activityLevel')}
-        <select onChange={handleActivityChange} className="rounded-md text-start bg-black">
-          <option value={1.2}>Sedentary</option>
-          <option value={1.4}>Light</option>
-          <option value={1.6}>Intense</option>
-        </select>
-      </label>
+    <div className="flex flex-col p-3 rounded-md w-60 h-60 bg-copper text-silver items-center justify-center">
+      <div className="w-full m-5">
+        <label className="flex flex-col text-black">
+          {t('weight')}
+          <input type="text" inputMode="numeric" onChange={handleWeightChange}
+            className="rounded-md text-center bg-black text-silver" value={weight} />
+        </label>
+        <label className="flex flex-col text-black">
+          {t('activityLevel')}
+          <select onChange={handleActivityChange} className="rounded-md text-center bg-black text-silver">
+            <option value={1.2}>Sedentary</option>
+            <option value={1.4}>Light</option>
+            <option value={1.6}>Intense</option>
+          </select>
+        </label>
+      </div>
+
+      <button className="rounded-md p-3 text-center bg-silver text-black
+        hover:bg-crimson hover:font-semibold hover:shadow-md hover:shadow-black transition-all w-full"
+        onClick={() => closeModal()}>
+        {t('save')}
+      </button>
     </div>
   )
 }

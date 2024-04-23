@@ -14,5 +14,8 @@
   "footer": {
     "start": "Feito com",
     "end": "por Gabriel Luiz"
-  }
+  },
+  "weight": "Massa corporal",
+  "activityLevel": "Nível de atividade",
+  "save": "Salvar"
 }
