@@ -15,7 +15,7 @@ function App() {
   const [proteinCounter, setProteinCounter] = useState(0);
   const [newCounter, setNewCounter] = useState(0);
   const [dailyGoal, setDailyGoal] = useState(86);
-  const [calculatorModal, setCalculatorModal] = useState(true);
+  const [calculatorModal, setCalculatorModal] = useState(false);
 
   const changeCounter = (value: number) => {
     let newValue = proteinCounter + value;
@@ -69,7 +69,7 @@ function App() {
         <Modal open={calculatorModal}>
           <DailyCalculator
             updateDailyGoalCb={useCallback((goal) => setDailyGoal(goal), [])}
-            closeModal={() => setCalculatorModal(false)} />
+            onSave={() => setCalculatorModal(false)} />
         </Modal>
         <LastWeek />
       </main>
