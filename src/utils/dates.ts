@@ -23,9 +23,6 @@ export const upkeepNewDay = () => {
   const lastDate = localStorage.getItem('currentDate') ?? getISODate(dayBefore);
 
   const lastWeek: LastWeekRecordType[] = JSON.parse(localStorage.getItem('lastWeek') ?? '{}');
-  if (!Object.keys(lastWeek).length || getISODate(new Date(lastWeek[0].date)) === getISODate(new Date()))
-    return;
-
   if (lastWeek.length >= 7)
     lastWeek.pop();
 
@@ -35,6 +32,6 @@ export const upkeepNewDay = () => {
   })
 
   localStorage.setItem('lastWeek', JSON.stringify(lastWeek));
-  localStorage.setItem('currentDate', getISODate(new Date()));
+  localStorage.setItem('currentDate', JSON.stringify(getISODate(new Date())));
   localStorage.setItem('currentValue', '0');
 }
