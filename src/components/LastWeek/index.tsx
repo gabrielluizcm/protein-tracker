@@ -8,7 +8,7 @@ type WeekRecordProps = {
 
 function WeekRecord({ value, date }: WeekRecordProps) {
   const { t } = useTranslation();
-  const dateObj = new Date(date);
+  const dateObj = new Date(JSON.parse(date));
   const weekday = dateObj.getDay();
 
   return (

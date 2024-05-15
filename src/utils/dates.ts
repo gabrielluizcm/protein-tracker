@@ -1,18 +1,18 @@
 import type { LastWeekRecordType } from "../components/LastWeek";
 
 export const getISODate = (date: Date) => {
-  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 
 export const hasDayPassed = () => {
-  const lastDateRecord = localStorage.getItem('currentDate');
+  const lastDateRecord = JSON.parse(localStorage.getItem('currentDate') ?? '');
   if (!lastDateRecord)
     return;
 
   const lastDate = new Date(lastDateRecord);
   const today = new Date();
 
-  return today.toLocaleDateString() > lastDate.toLocaleDateString();
+  return getISODate(today) > getISODate(lastDate);
 }
 
 export const upkeepNewDay = () => {
@@ -22,7 +22,8 @@ export const upkeepNewDay = () => {
   dayBefore.setDate(dayBefore.getDate() - 1);
   const lastDate = localStorage.getItem('currentDate') ?? getISODate(dayBefore);
 
-  const lastWeek: LastWeekRecordType[] = JSON.parse(localStorage.getItem('lastWeek') ?? '{}');
+  const lastWeek: LastWeekRecordType[] = JSON.parse(localStorage.getItem('lastWeek') ?? '[]');
+
   if (lastWeek.length >= 7)
     lastWeek.pop();
 
