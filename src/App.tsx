@@ -10,6 +10,8 @@ import Modal from "./components/Modal";
 
 import { getISODate, hasDayPassed, upkeepNewDay } from './utils/dates';
 
+import proteinImage from './images/protein.png';
+
 function App() {
   const [counterSpeed, setCounterSpeed] = useState(30);
   const [proteinCounter, setProteinCounter] = useState(0);
@@ -57,9 +59,12 @@ function App() {
   return (
     <>
       <main className="w-screen h-screen flex flex-col items-center justify-start pt-10 gap-10 bg-black z-0">
-        <h1 className="text-gold text-3xl flex flex-col">
-          <p>Protein</p>
-          <p className="pl-12">Tracker</p>
+        <h1 className="text-gold text-3xl flex items-center gap-3">
+          <img src={proteinImage} alt="Protein powder" className="w-16" />
+          <span className="z-2 relative">
+            <p>Protein</p>
+            <p className="pl-12">Tracker</p>
+          </span>
         </h1>
         <FaCalculator className="text-silver absolute text-2xl right-10 top-10
           cursor-pointer hover:text-gold transition-all"
