@@ -30,7 +30,7 @@ function App() {
   // Starting setup
   useEffect(() => {
     if (!localStorage.getItem('currentDate'))
-      localStorage.setItem('currentDate', getISODate(new Date()))
+      localStorage.setItem('currentDate', JSON.stringify(getISODate(new Date())))
 
     if (hasDayPassed())
       upkeepNewDay();
