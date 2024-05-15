@@ -21,7 +21,7 @@ export default function MyFooter() {
         </a>
       </p>
       <p>
-        {t('footer.start')} 💪
+        {t('footer.start')} 💪&nbsp;
         <a
           href="https://gabrielluizcm.github.io"
           target="_blank"
