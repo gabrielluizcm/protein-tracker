@@ -1,8 +1,15 @@
 {
   "name": "protein-tracker",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "homepage": "proteintracker.vercel.app",
+  "repository": "https://github.com/gabrielluizcm/protein-tracker",
+  "author": {
+    "name": "Gabriel Luiz",
+    "email": "dev.gabrielluiz@gmail.com",
+    "url": "https://gabrielluizcm.github.io"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

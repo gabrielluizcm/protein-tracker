@@ -1,30 +1,20 @@
-# React + TypeScript + Vite
+# Protein Tracker
+Simple protein tracker app to help me count my daily proteins and I need some project to get motived to start coding for fun/study again.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The are many existing applications for this purpose but for me there were too many details and steps just to track daily protein grams, so I reduced it to a couple buttons, ~~although now I need to know the proteins on my food before hand 😅~~ *(I may implement some kind of *'protein library'* in the future)*.
 
-Currently, two official plugins are available:
+## Tech info
+The project is built with **React+Vite+Typescript** and can be run by cloning the repo locally and executing `npm i` inside the directory, followed by `npm run dev` *(or the equilavent for your JS package manager of choice*).
+### Versions used in development
+| Node   | NPM    |
+| ------ | ------ |
+| 20.5.1 | 10.5.0 |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Deployment
+The production environment is hosted on Vercel at https://proteintracker.vercel.app
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Up next
+Future updates will include *(but are not limited to)* the following items:
+* Refactor to SOLID principles
+* Update UI/UX
+* Accounts system to sync counter between devices
