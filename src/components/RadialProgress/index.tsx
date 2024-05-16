@@ -7,7 +7,7 @@ import { getStorage, setStorage } from "../../utils/storage";
 
 import arrTWPercentageStart from "./twPercentages";
 
-export const counterSpeed = 5;
+const counterSpeed = 5;
 
 export default function RadialProgress() {
   const [displayPercentage, setDisplayPercentage] = useState(false);
@@ -17,6 +17,20 @@ export default function RadialProgress() {
   const { state: maxValue } = useGoal();
 
   const percentage = currentValue > maxValue ? 100 : Math.floor(currentValue / maxValue * 100);
+
+  // Starting setup
+  useEffect(() => {
+    if (!getStorage('currentDate'))
+      setStorage('currentDate', getISODate(new Date()));
+
+    if (hasDayPassed())
+      upkeepNewDay();
+    else {
+      const savedValue = getStorage('currentValue');
+      if (savedValue)
+        setNewValue(parseInt(savedValue));
+    }
+  }, []); //eslint-disable-line
 
   // Animation to every counter change
   useEffect(() => {
@@ -29,20 +43,6 @@ export default function RadialProgress() {
 
     return () => clearInterval(interval);
   }, [newValue, currentValue, setCurrentValue]);
-
-  // Starting setup
-  useEffect(() => {
-    if (!getStorage('currentDate'))
-      setStorage('currentDate', JSON.stringify(getISODate(new Date())));
-
-    if (hasDayPassed())
-      upkeepNewDay();
-    else {
-      const savedValue = localStorage.getItem('currentValue');
-      if (savedValue)
-        setNewValue(parseInt(savedValue));
-    }
-  }, [setNewValue]);
 
   return (
     <div

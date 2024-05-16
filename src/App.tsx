@@ -13,7 +13,6 @@ import { useGoal } from "./hooks/contexts";
 
 import { modalReducer } from "./reducers/modalReducer";
 
-
 function App() {
   const { setState: setDailyGoal } = useGoal();
   const [calculatorModal, dispatchModal] = useReducer(modalReducer, { open: false });

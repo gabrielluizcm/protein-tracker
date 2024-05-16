@@ -7,7 +7,7 @@ export const getISODate = (date: Date) => {
 }
 
 export const hasDayPassed = () => {
-  const lastDateRecord = JSON.parse(getStorage('currentDate') ?? '');
+  const lastDateRecord = getStorage('currentDate');
   if (!lastDateRecord)
     return;
 
@@ -24,7 +24,7 @@ export const upkeepNewDay = () => {
   dayBefore.setDate(dayBefore.getDate() - 1);
   const lastDate = getStorage('currentDate') ?? getISODate(dayBefore);
 
-  const lastWeek: LastWeekRecordType[] = JSON.parse(getStorage('lastWeek') ?? '[]');
+  const lastWeek: LastWeekRecordType[] = getStorage('lastWeek');
 
   if (lastWeek.length >= 7)
     lastWeek.pop();
@@ -34,7 +34,7 @@ export const upkeepNewDay = () => {
     date: lastDate
   })
 
-  setStorage('lastWeek', JSON.stringify(lastWeek));
-  setStorage('currentDate', JSON.stringify(getISODate(new Date())));
+  setStorage('lastWeek', lastWeek);
+  setStorage('currentDate', getISODate(new Date()));
   setStorage('currentValue', '0');
 }
