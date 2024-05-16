@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useReducer } from "react"
 import { FaCalculator } from 'react-icons/fa';
 
+import MyHeader from "./components/MyHeader";
 import RadialProgress from "./components/RadialProgress"
 import ButtonsPanel from "./components/ButtonsPanel";
 import LastWeek from "./components/LastWeek";
@@ -10,16 +11,16 @@ import Modal from "./components/Modal";
 
 import { useAcc, useNewAcc, useGoal } from "./hooks/contexts";
 
-import { getISODate, hasDayPassed, upkeepNewDay } from './utils/dates';
+import { modalReducer } from "./reducers/modalReducer";
 
-import proteinImage from './images/protein.png';
+import { getISODate, hasDayPassed, upkeepNewDay } from './utils/dates';
 
 function App() {
   const [counterSpeed, setCounterSpeed] = useState(30);
   const { state: proteinCounter, setState: setProteinCounter } = useAcc();
   const { state: newCounter, setState: setNewCounter } = useNewAcc();
   const { state: dailyGoal, setState: setDailyGoal } = useGoal();
-  const [calculatorModal, setCalculatorModal] = useState(false);
+  const [calculatorModal, dispatchModal] = useReducer(modalReducer, { open: false });
 
   const changeCounter = (value: number) => {
     let newValue = proteinCounter + value;
@@ -61,22 +62,16 @@ function App() {
   return (
     <>
       <main className="w-screen h-screen flex flex-col items-center justify-start pt-10 gap-10 bg-black z-0">
-        <h1 className="text-gold text-3xl flex items-center gap-3">
-          <img src={proteinImage} alt="Protein powder" className="w-16" />
-          <span className="z-2 relative">
-            <p>Protein</p>
-            <p className="pl-12">Tracker</p>
-          </span>
-        </h1>
+        <MyHeader />
         <FaCalculator className="text-silver absolute text-2xl right-10 top-10
           cursor-pointer hover:text-gold transition-all"
-          onClick={() => setCalculatorModal(true)} />
+          onClick={() => dispatchModal({ type: 'open' })} />
         <RadialProgress currentValue={proteinCounter} maxValue={dailyGoal} />
         <ButtonsPanel changeCounter={changeCounter} />
-        <Modal open={calculatorModal}>
+        <Modal open={calculatorModal.open}>
           <DailyCalculator
             updateDailyGoalCb={useCallback((goal) => setDailyGoal(goal), [])}
-            onSave={() => setCalculatorModal(false)} />
+            onSave={() => dispatchModal({ type: 'close' })} />
         </Modal>
         <LastWeek />
       </main>
