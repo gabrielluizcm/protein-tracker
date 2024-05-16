@@ -8,15 +8,17 @@ import MyFooter from "./components/MyFooter";
 import DailyCalculator from "./components/DailyCalculator";
 import Modal from "./components/Modal";
 
+import { useAcc, useNewAcc, useGoal } from "./hooks/contexts";
+
 import { getISODate, hasDayPassed, upkeepNewDay } from './utils/dates';
 
 import proteinImage from './images/protein.png';
 
 function App() {
   const [counterSpeed, setCounterSpeed] = useState(30);
-  const [proteinCounter, setProteinCounter] = useState(0);
-  const [newCounter, setNewCounter] = useState(0);
-  const [dailyGoal, setDailyGoal] = useState(86);
+  const { state: proteinCounter, setState: setProteinCounter } = useAcc();
+  const { state: newCounter, setState: setNewCounter } = useNewAcc();
+  const { state: dailyGoal, setState: setDailyGoal } = useGoal();
   const [calculatorModal, setCalculatorModal] = useState(false);
 
   const changeCounter = (value: number) => {
@@ -48,13 +50,13 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       if (newCounter > proteinCounter)
-        setProteinCounter(() => proteinCounter + 1);
+        setProteinCounter(proteinCounter + 1);
       else if (newCounter < proteinCounter)
-        setProteinCounter(() => proteinCounter - 1);
+        setProteinCounter(proteinCounter - 1);
     }, counterSpeed);
 
     return () => clearInterval(interval);
-  }, [newCounter, proteinCounter, counterSpeed]);
+  }, [newCounter, proteinCounter, setProteinCounter, counterSpeed]);
 
   return (
     <>
