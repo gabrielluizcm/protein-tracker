@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useAcc, useNewAcc, useGoal } from "../../hooks/contexts";
 
 import { getISODate, hasDayPassed, upkeepNewDay } from '../../utils/dates';
+import { getStorage, setStorage } from "../../utils/storage";
 
 import arrTWPercentageStart from "./twPercentages";
 
@@ -31,8 +32,8 @@ export default function RadialProgress() {
 
   // Starting setup
   useEffect(() => {
-    if (!localStorage.getItem('currentDate'))
-      localStorage.setItem('currentDate', JSON.stringify(getISODate(new Date())))
+    if (!getStorage('currentDate'))
+      setStorage('currentDate', JSON.stringify(getISODate(new Date())));
 
     if (hasDayPassed())
       upkeepNewDay();

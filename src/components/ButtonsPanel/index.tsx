@@ -1,5 +1,7 @@
 import { useAcc, useNewAcc } from "../../hooks/contexts";
 
+import { setStorage } from "../../utils/storage";
+
 import CounterButtons from "../CounterButtons";
 
 export default function ButtonsPanel() {
@@ -11,7 +13,7 @@ export default function ButtonsPanel() {
     if (newValue < 0)
       newValue = 0;
     setNewCounter(newValue);
-    localStorage.setItem('currentValue', newValue.toString());
+    setStorage('currentValue', newValue.toString());
   }
 
   return (
