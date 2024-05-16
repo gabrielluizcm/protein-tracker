@@ -1,10 +1,19 @@
+import { useAcc, useNewAcc } from "../../hooks/contexts";
+
 import CounterButtons from "../CounterButtons";
 
-type ButtonsPanelProps = {
-  changeCounter: (value: number) => void;
-}
+export default function ButtonsPanel() {
+  const { state: currentCounter } = useAcc();
+  const { setState: setNewCounter } = useNewAcc();
 
-export default function ButtonsPanel({ changeCounter }: ButtonsPanelProps) {
+  const changeCounter = (value: number) => {
+    let newValue = currentCounter + value;
+    if (newValue < 0)
+      newValue = 0;
+    setNewCounter(newValue);
+    localStorage.setItem('currentValue', newValue.toString());
+  }
+
   return (
     <section className="flex w-full md:w-1/2 items-center justify-center">
       <div className="w-4/5 flex justify-center gap-2 md:gap-5">
