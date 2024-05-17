@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next";
 
+import { getStorage } from "../../utils/storage";
+
 type WeekRecordProps = {
   date: string;
   value: string;
@@ -8,7 +10,8 @@ type WeekRecordProps = {
 
 function WeekRecord({ value, date }: WeekRecordProps) {
   const { t } = useTranslation();
-  const dateObj = new Date(JSON.parse(date));
+  const dateObj = new Date(date);
+  console.log(date)
   const weekday = dateObj.getDay();
 
   return (
@@ -32,10 +35,10 @@ export default function LastWeek() {
   const [lastWeek, setLastWeek] = useState<LastWeekRecordType[]>([]);
 
   useEffect(() => {
-    const last7 = localStorage.getItem('lastWeek');
+    const last7 = getStorage('lastWeek');
 
     if (last7)
-      setLastWeek(JSON.parse(last7));
+      setLastWeek(last7);
   }, []);
 
   return (
