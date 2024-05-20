@@ -11,7 +11,6 @@ type WeekRecordProps = {
 function WeekRecord({ value, date }: WeekRecordProps) {
   const { t } = useTranslation();
   const dateObj = new Date(date);
-  console.log(date)
   const weekday = dateObj.getDay();
 
   return (
