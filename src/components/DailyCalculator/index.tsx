@@ -64,6 +64,7 @@ export default function DailyCalculator({ closeModal }: DailyCalculatorProps) {
             <option value={1.2}>Sedentary</option>
             <option value={1.4}>Light</option>
             <option value={1.6}>Intense</option>
+            <option value={1.8}>Very Intense</option>
           </select>
         </label>
       </div>
