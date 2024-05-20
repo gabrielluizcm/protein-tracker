@@ -1,4 +1,4 @@
-import { useCallback, useReducer } from "react"
+import { useReducer } from "react"
 import { FaCalculator } from 'react-icons/fa';
 
 import MyHeader from "./components/MyHeader";
@@ -9,12 +9,9 @@ import MyFooter from "./components/MyFooter";
 import DailyCalculator from "./components/DailyCalculator";
 import Modal from "./components/Modal";
 
-import { useGoal } from "./hooks/contexts";
-
 import { modalReducer } from "./reducers/modalReducer";
 
 function App() {
-  const { setState: setDailyGoal } = useGoal();
   const [calculatorModal, dispatchModal] = useReducer(modalReducer, { open: false });
 
   return (
@@ -28,9 +25,7 @@ function App() {
         <RadialProgress />
         <ButtonsPanel />
         <Modal open={calculatorModal.open}>
-          <DailyCalculator
-            updateDailyGoalCb={useCallback((goal) => setDailyGoal(goal), [])}
-            onSave={() => dispatchModal({ type: 'close' })} />
+          <DailyCalculator closeModal={() => dispatchModal({ type: "close" })} />
         </Modal>
         <LastWeek />
       </main>

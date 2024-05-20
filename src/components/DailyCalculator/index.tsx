@@ -1,32 +1,34 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
+import { useGoal } from "../../hooks/contexts";
+
+import { getStorage, setStorage } from "../../utils/storage";
+
 type DailyCalculatorProps = {
-  updateDailyGoalCb: (goal: number) => void;
-  onSave: () => void;
+  closeModal: () => void
 }
 
-export default function DailyCalculator({ updateDailyGoalCb, onSave }: DailyCalculatorProps) {
+export default function DailyCalculator({ closeModal }: DailyCalculatorProps) {
   const { t } = useTranslation();
   const [weight, setWeight] = useState(0);
   const [activityMultiplier, setActivityMultiplier] = useState(1.2);
-
-  useEffect(() => {
-    const savedWeight = localStorage.getItem('weight');
-    const savedActivity = localStorage.getItem('activityLevel');
-    if (savedWeight && savedActivity) {
-      const parsedWeight = JSON.parse(savedWeight);
-      const parsedActivity = JSON.parse(savedActivity)
-      setWeight(parsedWeight);
-      setActivityMultiplier(parsedActivity);
-      updateDailyGoal(parsedWeight, parsedActivity);
-    }
-  }, []);
+  const { setState: setDailyGoal } = useGoal();
 
   const updateDailyGoal = (weight: number, activityMult: number) => {
     const goal = parseFloat((weight * activityMult).toFixed(1));
-    updateDailyGoalCb(goal);
+    setDailyGoal(goal);
   }
+
+  useEffect(() => {
+    const savedWeight = getStorage('weight');
+    const savedActivity = getStorage('activityLevel');
+    if (savedWeight && savedActivity) {
+      setWeight(savedWeight);
+      setActivityMultiplier(savedActivity);
+      updateDailyGoal(savedWeight, savedActivity);
+    }
+  }, []); //eslint-disable-line
 
   const handleWeightChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const rawValue = evt.target.value;
@@ -42,10 +44,10 @@ export default function DailyCalculator({ updateDailyGoalCb, onSave }: DailyCalc
   }
 
   const handleSaveClick = () => {
-    localStorage.setItem('weight', JSON.stringify(weight));
-    localStorage.setItem('activityLevel', JSON.stringify(activityMultiplier));
+    setStorage('weight', weight);
+    setStorage('activityLevel', activityMultiplier);
     updateDailyGoal(weight, activityMultiplier);
-    onSave();
+    closeModal();
   }
 
   return (
