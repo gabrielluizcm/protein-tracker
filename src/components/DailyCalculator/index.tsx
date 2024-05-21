@@ -61,10 +61,9 @@ export default function DailyCalculator({ closeModal }: DailyCalculatorProps) {
         <label className="flex flex-col text-black">
           {t('activityLevel')}
           <select onChange={handleActivityChange} className="rounded-md text-center bg-black text-silver" value={activityMultiplier}>
-            <option value={1.2}>Sedentary</option>
-            <option value={1.4}>Light</option>
-            <option value={1.6}>Intense</option>
-            <option value={1.8}>Very Intense</option>
+            <option value={1.8}>Sedentary</option>
+            <option value={2.0}>Light</option>
+            <option value={2.2}>Intense</option>
           </select>
         </label>
       </div>
